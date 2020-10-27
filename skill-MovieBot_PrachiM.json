@@ -1,0 +1,530 @@
+{
+  "intents": [
+    {
+      "intent": "Greetings",
+      "examples": [
+        {
+          "text": "Good afternoon"
+        },
+        {
+          "text": "Good evening"
+        },
+        {
+          "text": "Good morning"
+        },
+        {
+          "text": "Hello"
+        },
+        {
+          "text": "Hi"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "otp",
+      "examples": [
+        {
+          "text": "12AB"
+        }
+      ]
+    },
+    {
+      "intent": "seats",
+      "examples": [
+        {
+          "text": "1"
+        },
+        {
+          "text": "2"
+        },
+        {
+          "text": "3"
+        },
+        {
+          "text": "4"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "timings",
+      "examples": [
+        {
+          "text": "12 noon"
+        },
+        {
+          "text": "2 pm"
+        },
+        {
+          "text": "4.30 pm"
+        },
+        {
+          "text": "6.30 p.m"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "location",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Mumbai",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Thane",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "movie",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Bhoot",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Dil Bechara",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Shakuntala Devi",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Thappad",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-date",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-number",
+      "values": []
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_10_1603784601476",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "otp",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Ticket details sent to mobile number. Make payment to confirm. Thank you."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#otp",
+      "dialog_node": "node_10_1603784601476",
+      "previous_sibling": "node_8_1603784540721"
+    },
+    {
+      "type": "standard",
+      "title": "Seats",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Enter the date to watch movie"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#seats",
+      "dialog_node": "node_1_1603782040793",
+      "previous_sibling": "node_4_1603781944473"
+    },
+    {
+      "type": "standard",
+      "title": "movietime",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Okay. OTP will be sent to your mobile number. Enter mobile number."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#timings",
+      "dialog_node": "node_1_1603783270119",
+      "previous_sibling": "node_9_1603783174680"
+    },
+    {
+      "type": "standard",
+      "title": "movie2",
+      "output": {
+        "generic": [
+          {
+            "source": "https://i2.cinestaan.com/image-bank/1500-1500/174001-175000/174241.jpg",
+            "response_type": "image"
+          },
+          {
+            "title": "Select Location",
+            "options": [
+              {
+                "label": "Mumbai",
+                "value": {
+                  "input": {
+                    "text": "Mumbai"
+                  }
+                }
+              },
+              {
+                "label": "Thane",
+                "value": {
+                  "input": {
+                    "text": "Thane"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "conditions": "@movie:(Dil Bechara)",
+      "dialog_node": "node_1_1603783881946",
+      "previous_sibling": "node_9_1603781701830"
+    },
+    {
+      "type": "standard",
+      "title": "movie3",
+      "output": {
+        "generic": [
+          {
+            "source": "https://m.media-amazon.com/images/M/MV5BNWQ1Yzc2NDYtN2RjNC00ZGIyLWJkMjItMDlkODVhNjg0OTczXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg",
+            "response_type": "image"
+          },
+          {
+            "title": "Select Location",
+            "options": [
+              {
+                "label": "Mumbai",
+                "value": {
+                  "input": {
+                    "text": "Mumbai"
+                  }
+                }
+              },
+              {
+                "label": "Thane",
+                "value": {
+                  "input": {
+                    "text": "Thane"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "conditions": "@movie:Thappad",
+      "dialog_node": "node_2_1603784049647",
+      "previous_sibling": "node_1_1603783881946"
+    },
+    {
+      "type": "standard",
+      "title": "Location",
+      "output": {
+        "generic": [
+          {
+            "title": "Select the number of seats",
+            "options": [
+              {
+                "label": "1",
+                "value": {
+                  "input": {
+                    "text": "1"
+                  }
+                }
+              },
+              {
+                "label": "2",
+                "value": {
+                  "input": {
+                    "text": "2"
+                  }
+                }
+              },
+              {
+                "label": "3",
+                "value": {
+                  "input": {
+                    "text": "3"
+                  }
+                }
+              },
+              {
+                "label": "4",
+                "value": {
+                  "input": {
+                    "text": "4"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "conditions": "@location",
+      "dialog_node": "node_4_1603781944473",
+      "previous_sibling": "node_2_1603784049647"
+    },
+    {
+      "type": "standard",
+      "title": "Greetings",
+      "output": {
+        "generic": [
+          {
+            "title": "Select the movie",
+            "options": [
+              {
+                "label": "Shakuntala Devi",
+                "value": {
+                  "input": {
+                    "text": "Shakuntala Devi"
+                  }
+                }
+              },
+              {
+                "label": "Dil Bechara",
+                "value": {
+                  "input": {
+                    "text": "Dil Bechara"
+                  }
+                }
+              },
+              {
+                "label": "Thappad",
+                "value": {
+                  "input": {
+                    "text": "Thappad"
+                  }
+                }
+              },
+              {
+                "label": "Bhoot",
+                "value": {
+                  "input": {
+                    "text": "Bhoot"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "metadata": {
+        "_customization": {
+          "mcr": false
+        }
+      },
+      "conditions": "#Greetings",
+      "dialog_node": "node_8_1603284966182",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "sendotp",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "OTP sent to mobile number. Please enter the OTP."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "@sys-number",
+      "dialog_node": "node_8_1603784540721",
+      "previous_sibling": "node_1_1603783270119"
+    },
+    {
+      "type": "standard",
+      "title": "movie1",
+      "output": {
+        "generic": [
+          {
+            "source": "https://upload.wikimedia.org/wikipedia/en/thumb/a/af/Shakuntala_Devi_Film.jpg/220px-Shakuntala_Devi_Film.jpg",
+            "response_type": "image"
+          },
+          {
+            "title": "Select Location",
+            "options": [
+              {
+                "label": "Mumbai",
+                "value": {
+                  "input": {
+                    "text": "Mumbai"
+                  }
+                }
+              },
+              {
+                "label": "Thane",
+                "value": {
+                  "input": {
+                    "text": "Thane"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "conditions": "@movie:(Shakuntala Devi)",
+      "dialog_node": "node_9_1603781701830",
+      "previous_sibling": "node_8_1603284966182"
+    },
+    {
+      "type": "standard",
+      "title": "moviedate",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Available timings are: 12 noon, 2 pm, 4.30 p.m, 6.30 p.m. Enter time you want"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "@sys-date",
+      "dialog_node": "node_9_1603783174680",
+      "previous_sibling": "node_1_1603782040793"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1603284966182",
+      "disabled": true,
+      "dialog_node": "response_5_1603783713963"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. I am the Movie Ticketing Bot. I can help you search for movies and book tickets. How may I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "MovieBot",
+  "language": "en",
+  "description": ""
+}
